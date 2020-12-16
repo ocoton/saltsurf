@@ -47,6 +47,28 @@
     align-items: center;
     margin-top: 4px;
   }
+
+  .overlay p {
+    display: none;
+  }
+
+  .overlay {
+    position: relative;
+    top: -328px;
+  }
+
+  #bg-compare {
+    height:200px;
+    width:100%;
+  }
+  #bg-improve {
+    height:200px;
+    width:100%;
+  }
+  #bg-record {
+    height:200px;
+    width:100%;
+  }
 }
 
 // Small devices (landscape phones, 576px and up)
@@ -56,6 +78,33 @@
   }
   .search-width {
     width: 430px;
+  }
+
+  .overlay p {
+    display: none;
+  }
+
+  .home-banner-compare .overlay {
+    position: relative;
+    top: -328px;
+  }
+
+  .home-banner-improve .overlay {
+    position: relative;
+    top: -328px;
+  }
+
+  #bg-compare {
+    height:200px;
+    width:100%;
+  }
+  #bg-improve {
+    height:200px;
+    width:100%;
+  }
+  #bg-record {
+    height:200px;
+    width:100%;
   }
 }
 
