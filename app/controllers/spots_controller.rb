@@ -51,7 +51,7 @@ class SpotsController < ApplicationController
       elsif tide.timestamp.day == Time.now.day && tide.status == "high"
         @today_high_tides << tide
       end
-        
+
     end
   end
 
