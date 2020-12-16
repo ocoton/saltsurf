@@ -37,6 +37,7 @@ gem 'autoprefixer-rails'
 gem 'font-awesome-sass'
 gem 'simple_form'
 gem 'httparty'
+gem 'whenever', require: false
 
 group :development, :test do
   gem 'pry-byebug'
