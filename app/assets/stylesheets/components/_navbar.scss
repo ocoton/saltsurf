@@ -86,11 +86,13 @@
   @media (min-width: 100px) and (max-width: 576px) {
     position: absolute;
     left: 80px;
+    top:-14px;
   }
 
   @media (min-width: 576px) {
     position: absolute;
     left: 120px;
+    top:-14px;
   }
 }
 
