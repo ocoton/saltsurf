@@ -52,11 +52,6 @@
     display: none;
   }
 
-  .overlay {
-    position: relative;
-    top: -328px;
-  }
-
   #bg-compare {
     height:200px;
     width:100%;
@@ -68,6 +63,16 @@
   #bg-record {
     height:200px;
     width:100%;
+  }
+
+  .home-banner-compare {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .home-banner-improve {
+    display: flex;
+    flex-direction: column-reverse;
   }
 }
 
@@ -84,16 +89,6 @@
     display: none;
   }
 
-  .home-banner-compare .overlay {
-    position: relative;
-    top: -328px;
-  }
-
-  .home-banner-improve .overlay {
-    position: relative;
-    top: -328px;
-  }
-
   #bg-compare {
     height:200px;
     width:100%;
@@ -105,6 +100,16 @@
   #bg-record {
     height:200px;
     width:100%;
+  }
+
+  .home-banner-compare {
+    display: flex;
+    flex-direction: column-reverse;
+  }
+
+  .home-banner-improve {
+    display: flex;
+    flex-direction: column-reverse;
   }
 }
 
