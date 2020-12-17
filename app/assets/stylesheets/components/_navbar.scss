@@ -21,7 +21,13 @@
 }
 
 .navbar-lewagon .navbar-brand img {
-  width: 89px;
+  @media (min-width: 100px) and (max-width: 576px) {
+    width: 58px;
+  }
+
+  @media (min-width: 576px){
+    width: 89px;
+  }
 }
 
 .custom-form-slider-navbar {
@@ -77,8 +83,15 @@
 }
 
 .navbar-container {
-  position: absolute;
-  left: 120px;
+  @media (min-width: 100px) and (max-width: 576px) {
+    position: absolute;
+    left: 80px;
+  }
+
+  @media (min-width: 576px) {
+    position: absolute;
+    left: 120px;
+  }
 }
 
 .gradient-btn {
