@@ -39,10 +39,10 @@
   <div class="btn-group btn-group-toggle mb-3 px-3" >
     <ul class="nav nav-pills" id="custom-tabs-name-tab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link custom-tab default active" id="morning-tab" data-toggle="pill" href="#morning" role="tab" aria-controls="morning" aria-selected="true">Today 8am</a>
+        <a class="nav-link custom-tab default active" id="morning-tab" data-toggle="pill" href="#morning" role="tab" aria-controls="morning" aria-selected="true">US NOAA</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link custom-tab" id="afternoon-tab" data-toggle="pill" href="#afternoon" role="tab" aria-controls="afternoon" aria-selected="false">Today 2pm</a>
+        <a class="nav-link custom-tab" id="afternoon-tab" data-toggle="pill" href="#afternoon" role="tab" aria-controls="afternoon" aria-selected="false">Metreo</a>
       </li>
     </ul>
   </div>
@@ -53,8 +53,8 @@
         <%# morning tab %>
         <div class="tab-pane fade show active" id="morning" role="tabpanel" aria-labelledby="morning-tab">
           <div class="container">
-            <div class="row row-cols-2">
-              <%= render '/spots/forecast_am' %>
+            <div class="row">
+              <%= render '/spots/forecast_table' %>
             </div>
           </div>
         </div>
@@ -62,7 +62,7 @@
         <div class="tab-pane fade" id="afternoon" role="tabpanel" aria-labelledby="afternoon-tab">
           <div class="container">
             <div class="row row-cols-2">
-              <%= render '/spots/forecast_pm' %>
+              
             </div>
           </div>
         </div>

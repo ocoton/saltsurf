@@ -1,12 +1,12 @@
-            <% if @forecasts_pm.empty?  %>
+            <% if @forecasts_am.empty?  %>
               <p> no data for this time</p>
             <% else %>
-              <% @forecasts_pm.each do |forecast| %>
+              <% @forecasts_am.each do |forecast| %>
                 <%# card div %>
                 <div class="col px-3 text-center h-100%">
                   <div class="shadow rounded card-show">
                     <div id="top-of-card mt-5" class="d-flex flex-column justify-content-center card-top-custom-show ">
-                      <h4 class="mt-5"><%= forecast.source %></h4>
+                      
                       <div class="d-flex justify-content-center shaka-toggle">
                         <%forecast.rating.times do %>
                           <!-- <p> <%#= inline_svg("shaka_svg", options={class: "shaka-white shaka-small pl-2"})%> </p>  -->
