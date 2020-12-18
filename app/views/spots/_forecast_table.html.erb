@@ -1,41 +1,5 @@
-            <% unless @forecasts_today  %>
-              <p> no data for this time</p>
-            <% else %>
+<% unless @forecasts_today  %>
+  <p> no data for this time</p>
+<% else %>
 
-                <%# card div %>
-                <div class="border col px-3 text-center h-100%">
-                  <div class="border shadow rounded card-show d-flex">
-                    <% @forecasts_today.each do |forecast| %>
-                    <div class="border">
-                    <p><%= forecast.timestamp.hour %></p>
-                      <p class="mt-3"> Wave</p>
-                      <hr style="width:50%;" class="text-center my-1 mb-2">
-                        <i class="fas fa-arrows-alt-v picto-icon"></i>
-                        <p class="pl-3 picto-icon"><%= forecast.wave_height.round(1) %>m</p>
-                        <i class="fas fa-wave-square picto-icon" ></i>
-                        <p class="pl-2 picto-icon"><%= forecast.period %>s</p>
-                        <% if forecast.swell_height < 0.5 %>
-                          <%= inline_svg("1-wave.svg", options={class: "picto-wave"})%>
-                          <p class="pl-2 picto-icon"><%= forecast.wave_height.round(1)%>m</p>
-                        <% elsif forecast.swell_height < 1.5 %>
-                          <%= inline_svg("2-waves.svg", options={class: "picto-wave"})%>
-                          <p class="pl-2 picto-icon"><%= forecast.swell_height.round(1)%>m</p>
-                        <% else %>
-                          <%= inline_svg("3-waves.svg", options={class: "picto-wave"})%>
-                          <p class="pl-2 picto-icon"><%= forecast.swell_height.round(1)%>m</p>
-                        <% end %>
-                        <i class="fas fa-arrow-down picto-icon" style="transform: rotate(<%= forecast.swell_direction %>deg); -ms-transform: rotate(<%= forecast.swell_direction %>deg); -webkit-transform: rotate(<%= forecast.swell_direction %>deg);"></i>
-                        <p class="pl-2 picto-icon"><%= forecast.swell_direction %>° </p>
-                      <p class="mt-2"> Wind</p>
-                      <hr style="width:50%;" class="my-1 text-center mb-2">
-                      <i class="fas fa-wind pr-2 picto-icon"></i>
-                      <p class="<%= if forecast.wind_speed >= 15 then 'text-warning' elsif forecast.wind_speed >= 10 then 'text-danger' else 'text-success' end %>">
-                        <%= forecast.wind_speed %>kts
-                      </p>
-                      <i class="fas fa-location-arrow picto-icon" style="transform: rotate(<%= (forecast.wind_direction-210) %>deg); -ms-transform: rotate(<%= (forecast.wind_direction-210) %>deg); -webkit-transform: rotate(<%= (forecast.wind_direction-210) %>deg);"></i>
-                      <p class="pl-2 picto-icon"> <%= forecast.wind_direction %>° </p>
-                   </div>
-                    <% end %>
-                  </div>
-                </div>
-            <% end %>
+<% end %>
