@@ -51,8 +51,26 @@ p, i {
 }
 
 .custom-table {
-  
-  & p, td, i {
+  & p, td, i, th {
+  align-items: center !important;
+  padding: 6px !important;
+  font-size: smaller;
+  }
+& td, i {
   color: $gray !important;
+  align-items: middle;
+  }
+& th {
+  & i {
+    color: black !important;
+    font-size: medium !important;
+      }
+  }
+
+  & td:nth-child(5n + 1) {
+    border-right: 1px dashed $light-blue;
+  }
+  & td:last-child {
+    border-right: none !important;
   }
 }

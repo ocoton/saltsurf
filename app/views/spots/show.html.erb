@@ -96,19 +96,29 @@
             <table class="table table-striped rounded custom-table">
             <%# HEADER %>
               <thead>
-                <tr style="" class="">
-                  <th scope="col"></th>
+                <tr style="" class="pb-3">
+                  <th class="" scope="col"></th>
+                  <%# title today %>
                   <th scope="col" colspan="<%= forecasts_today_keep.length%>">
                     <h5> <%= forecasts_today.first.timestamp.day%> </h5>
-                      <%= render partial: "shaka", locals: {forecast: forecasts_today.third} %>
+                    <%= render partial: "shaka", locals: {forecast: forecasts_today_keep.third} %>
                   </th>
-                  <th scope="col" colspan="<%= forecasts_tomorrow_keep.length%>" ><%= forecasts_tomorrow.first.timestamp.day%></th>
-                  <th scope="col" colspan="<%= forecasts_third_keep.length%>" ><%= forecasts_third.first.timestamp.day%></th>
+                  <%# title tomorrow %>
+                  <th scope="col" colspan="<%= forecasts_tomorrow_keep.length unless forecasts_tomorrow_keep.empty? %>" >
+                    <h5><%= forecasts_tomorrow_keep.first.timestamp.day unless forecasts_tomorrow_keep.empty? %> </h5>
+                    <%= render partial: "shaka", locals: {forecast: forecasts_tomorrow_keep.third} %>
+                  </th>
+                  <%# title third day %>
+                  <th scope="col" colspan="<%= forecasts_third_keep.length unless forecasts_third_keep.empty?%>" >
+                    <h5><%= forecasts_third_keep.first.timestamp.day unless forecasts_third_keep.empty? %></h5>
+                    <%= render partial: "shaka", locals: {forecast: forecasts_third_keep.third} %>
+                  </th>
                 </tr>
               </thead>
               <tbody class="">
               <%# timestamp %>
-                <tr>
+                
+                <tr class="border-bottom">
                   <th scope="row"><i class="far fa-clock text-primary"></i></th>
                   <% forecasts_today_keep.each do |forecast| %> 
                     <td> <%= forecast.timestamp.hour %>:00 </td>
@@ -123,6 +133,9 @@
                 <%# wave section %>
                 <tr class="bg-white">
                   <th> Waves</th>
+                  <% 15.times do %>
+                    <td></td>
+                  <% end %>
                 </tr>
                 <%# wave height %>
                 <tr> 
@@ -151,7 +164,7 @@
                   <% end %>
                 </tr>
                 <%# swell direction %>
-                <tr>
+                <tr class="border-bottom">
                   <th scope="row"><i class="far fa-compass"></i></th>
                   <% forecasts_today_keep.each do |forecast| %> 
                     <td> <i class="fas fa-arrow-down picto-icon" style="transform: rotate(<%= forecast.swell_direction %>deg); -ms-transform: rotate(<%= forecast.swell_direction %>deg); -webkit-transform: rotate(<%= forecast.swell_direction %>deg);"></i> </td>
@@ -164,8 +177,11 @@
                   <% end %>
                 </tr>
                 <%# Wind section %>
-                <tr class="bg-white">
+                <tr class="bg-white ">
                   <th> Wind</th>
+                  <% 15.times do %>
+                    <td></td>
+                  <% end %>
                 </tr>
                 <%# wind speed %>
                 <tr>
@@ -208,7 +224,7 @@
       </div>
     </div>
     <%# map on right side %>
-    <div class="col-sm-4 text-center d-flex flex-column justify-content-between">
+    <div class="col-sm-3 text-center d-flex flex-column justify-content-between ml-3">
       <div id="map"
         class="non-sticky"
         data-markers="<%= @markers.to_json %>"
