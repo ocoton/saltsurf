@@ -24,15 +24,6 @@ class SpotsController < ApplicationController
   end
 
   def show
-    @forecasts_am = []
-    @forecasts_pm = []
-    Forecast.where(spot_id: @spot.id).each do |forecast|
-      if forecast.timestamp == Time.now.utc.beginning_of_day + 8.hours
-        @forecasts_am << forecast
-      elsif forecast.timestamp == Time.now.utc.beginning_of_day + 14.hours
-        @forecasts_pm << forecast
-      end
-    end
     @array = []
     @array << @spot
     @markers = @array.map do |spot| {

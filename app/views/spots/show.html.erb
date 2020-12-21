@@ -39,43 +39,43 @@
   <div class="btn-group btn-group-toggle mb-3 px-3" >
     <ul class="nav nav-pills" id="custom-tabs-name-tab" role="tablist">
       <li class="nav-item">
-        <a class="nav-link custom-tab default active" id="morning-tab" data-toggle="pill" href="#morning" role="tab" aria-controls="morning" aria-selected="true">Today 8am</a>
+        <a class="nav-link custom-tab default active" id="morning-tab" data-toggle="pill" href="#morning" role="tab" aria-controls="morning" aria-selected="true">US NOAA</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link custom-tab" id="afternoon-tab" data-toggle="pill" href="#afternoon" role="tab" aria-controls="afternoon" aria-selected="false">Today 2pm</a>
+        <a class="nav-link custom-tab" id="afternoon-tab" data-toggle="pill" href="#afternoon" role="tab" aria-controls="afternoon" aria-selected="false"> Météo-France</a>
       </li>
     </ul>
   </div>
   <div class="row">
     <%# forecast-cards %>
-    <div class = "col-md-8">
+    <div class = "col pr-0 mb-3">
+<!--     <div class = "col-md-8"> -->
       <div class="px-0 tab-content" id="custom-tabs-name-tabContent">
-        <%# morning tab %>
+        <%# NOAA tab %>
         <div class="tab-pane fade show active" id="morning" role="tabpanel" aria-labelledby="morning-tab">
-          <div class="container">
-            <div class="row row-cols-2">
-              <%= render '/spots/forecast_am' %>
-            </div>
+          <div class="container rounded shadow bg-white col ml-3 p-2 text-center h-100%">
+            <%# render table and pass only NOAA data %>
+              <%= render partial: "forecast_table", locals: {spot_forecasts: Forecast.where(spot_id: @spot.id, source: "US NOAA")} %>
           </div>
         </div>
-        <%# afternoon tab %>
+        <%# Meteo tab %>
         <div class="tab-pane fade" id="afternoon" role="tabpanel" aria-labelledby="afternoon-tab">
-          <div class="container">
-            <div class="row row-cols-2">
-              <%= render '/spots/forecast_pm' %>
-            </div>
+          <div class="container rounded shadow bg-white col ml-3 p-2 text-center h-100%">
+            <%# render table and pass only Metreo data %>
+            <%# <%= render partial: "forecast_table", locals: {spot_forecasts: Forecast.where(spot_id: @spot.id, source: "Météo-France")} %> %>
           </div>
         </div>
       </div>
     </div>
     <%# map on right side %>
-    <div class="col-md-4 text-center d-flex flex-column justify-content-between" id="tide-map-card">
+    <div class="col col-md text-center d-flex flex-column justify-content-between ml-3">
+<!--     <div class="col-md-4 text-center d-flex flex-column justify-content-between" id="tide-map-card"> -->
       <div id="map"
         class="non-sticky"
         data-markers="<%= @markers.to_json %>"
         data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
-      <div class="bg-white shadow rounded pt-3 p-2 weather-card">
+      <div class="bg-white shadow rounded mb-3 p-2 weather-card">
         <div class="d-flex justify-content-center border-bottom">
           <p class="mx-3"><i class="fas fa-cloud-sun picto-icon"></i> <%= @spot.forecast_today.air_temperature %>°C</p>
           <p class="mx-3"><i class="fas fa-thermometer-three-quarters picto-icon"></i> <%= @spot.forecast_today.water_temperature %>°C</p>
