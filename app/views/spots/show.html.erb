@@ -62,7 +62,7 @@
         <div class="tab-pane fade" id="afternoon" role="tabpanel" aria-labelledby="afternoon-tab">
           <div class="container rounded shadow bg-white col ml-3 p-2 text-center h-100%">
             <%# render table and pass only Metreo data %>
-            <%# <%= render partial: "forecast_table", locals: {spot_forecasts: Forecast.where(spot_id: @spot.id, source: "Météo-France")} %> %>
+            <%= render partial: "forecast_table", locals: {spot_forecasts: Forecast.where(spot_id: @spot.id, source: "Météo-France")} %>
           </div>
         </div>
       </div>
