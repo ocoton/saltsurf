@@ -42,195 +42,38 @@
         <a class="nav-link custom-tab default active" id="morning-tab" data-toggle="pill" href="#morning" role="tab" aria-controls="morning" aria-selected="true">US NOAA</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link custom-tab" id="afternoon-tab" data-toggle="pill" href="#afternoon" role="tab" aria-controls="afternoon" aria-selected="false">Metreo</a>
+        <a class="nav-link custom-tab" id="afternoon-tab" data-toggle="pill" href="#afternoon" role="tab" aria-controls="afternoon" aria-selected="false"> Météo-France</a>
       </li>
     </ul>
   </div>
   <div class="row">
     <%# forecast-cards %>
-    <%# do calculations %>
-
-    <div class = "col-md-8 pr-0">
+    <div class = "col pr-0 mb-3">
       <div class="px-0 tab-content" id="custom-tabs-name-tabContent">
         <%# NOAA tab %>
         <div class="tab-pane fade show active" id="morning" role="tabpanel" aria-labelledby="morning-tab">
-          <div class="container border rounded shadow bg-white col ml-3 p-0 text-center h-100%">
-            
-            <%# render %>
-            <% spot_forecasts = Forecast.where(spot_id: @spot.id, source: "US NOAA") %>
-
-            <%# calculations %>
-              <% forecasts_today = [] %> 
-              <% forecasts_tomorrow = [] %> 
-              <% forecasts_third = [] %> 
-
-              <%spot_forecasts.each do |forecast|%> 
-                <%if forecast.timestamp.day == Time.now.utc.day%> 
-                <% forecasts_today << forecast%> 
-                <%elsif forecast.timestamp.day == Time.now.utc.day + 1%> 
-                  <%forecasts_tomorrow << forecast%> 
-                <%elsif forecast.timestamp.day == Time.now.utc.day + 2%> 
-                  <%forecasts_third << forecast%> 
-                <%end%> 
-              <%end%>
-            <%# only keep certain timestamps of the day %>
-              <%forecasts_today_keep = []%>
-              <%forecasts_tomorrow_keep = []%>
-              <%forecasts_third_keep = []%>
-
-              <%forecasts_today.each do |forecast|%> 
-                <%if [6, 10, 14, 16, 20].include? forecast.timestamp.hour%> 
-                  <%forecasts_today_keep << forecast%> 
-                <%end%> 
-              <%end%> 
-              <%forecasts_tomorrow.each do |forecast|%> 
-                <%if [6, 10, 14, 16, 20].include? forecast.timestamp.hour%> 
-                  <%forecasts_tomorrow_keep << forecast%> 
-                <%end%> 
-              <%end%> 
-                <%forecasts_third.each do |forecast|%> 
-                <%if [6, 10, 14, 16, 20].include? forecast.timestamp.hour%> 
-                  <%forecasts_third_keep << forecast%> 
-                <%end%> 
-              <%end%> 
-            <table class="table table-striped rounded custom-table">
-            <%# HEADER %>
-              <thead>
-                <tr style="" class="pb-3">
-                  <th class="" scope="col"></th>
-                  <%# title today %>
-                  <th scope="col" colspan="<%= forecasts_today_keep.length%>">
-                    <h5> <%= forecasts_today.first.timestamp.day%> </h5>
-                    <%= render partial: "shaka", locals: {forecast: forecasts_today_keep.third} %>
-                  </th>
-                  <%# title tomorrow %>
-                  <th scope="col" colspan="<%= forecasts_tomorrow_keep.length unless forecasts_tomorrow_keep.empty? %>" >
-                    <h5><%= forecasts_tomorrow_keep.first.timestamp.day unless forecasts_tomorrow_keep.empty? %> </h5>
-                    <%= render partial: "shaka", locals: {forecast: forecasts_tomorrow_keep.third} %>
-                  </th>
-                  <%# title third day %>
-                  <th scope="col" colspan="<%= forecasts_third_keep.length unless forecasts_third_keep.empty?%>" >
-                    <h5><%= forecasts_third_keep.first.timestamp.day unless forecasts_third_keep.empty? %></h5>
-                    <%= render partial: "shaka", locals: {forecast: forecasts_third_keep.third} %>
-                  </th>
-                </tr>
-              </thead>
-              <tbody class="">
-              <%# timestamp %>
-                
-                <tr class="border-bottom">
-                  <th scope="row"><i class="far fa-clock text-primary"></i></th>
-                  <% forecasts_today_keep.each do |forecast| %> 
-                    <td> <%= forecast.timestamp.hour %>:00 </td>
-                  <% end %>
-                  <% forecasts_tomorrow_keep.each do |forecast| %> 
-                    <td> <%= forecast.timestamp.hour %>:00</td>
-                  <% end %>
-                  <% forecasts_third_keep.each do |forecast| %> 
-                    <td> <%= forecast.timestamp.hour %>:00</td>
-                  <% end %>
-                </tr>
-                <%# wave section %>
-                <tr class="bg-white">
-                  <th> Waves</th>
-                  <% 15.times do %>
-                    <td></td>
-                  <% end %>
-                </tr>
-                <%# wave height %>
-                <tr> 
-                  <th scope="row"><i class="fas fa-arrows-alt-v picto-icon text-primary"></i></th>
-                  <% forecasts_today_keep.each do |forecast| %> 
-                    <td> <%= forecast.wave_height.round(1) %>m</td>
-                  <% end %>
-                  <% forecasts_tomorrow_keep.each do |forecast| %> 
-                    <td> <%= forecast.wave_height.round(1) %>m</td>
-                  <% end %>
-                  <% forecasts_third_keep.each do |forecast| %> 
-                    <td> <%= forecast.wave_height.round(1) %>m</td>
-                  <% end %>
-                </tr>
-              <%# period %>
-                <tr>
-                  <th scope="row"><i class="fas fa-wave-square picto-icon" ></i></th>
-                  <% forecasts_today_keep.each do |forecast| %> 
-                    <td> <%= forecast.period %>s </td>
-                  <% end %>
-                  <% forecasts_tomorrow_keep.each do |forecast| %> 
-                    <td> <%= forecast.period %>s</td>
-                  <% end %>
-                  <% forecasts_third_keep.each do |forecast| %> 
-                    <td> <%= forecast.period %>s</td>
-                  <% end %>
-                </tr>
-                <%# swell direction %>
-                <tr class="border-bottom">
-                  <th scope="row"><i class="far fa-compass"></i></th>
-                  <% forecasts_today_keep.each do |forecast| %> 
-                    <td> <i class="fas fa-arrow-down picto-icon" style="transform: rotate(<%= forecast.swell_direction %>deg); -ms-transform: rotate(<%= forecast.swell_direction %>deg); -webkit-transform: rotate(<%= forecast.swell_direction %>deg);"></i> </td>
-                  <% end %>
-                  <% forecasts_tomorrow_keep.each do |forecast| %> 
-                    <td> <i class="fas fa-arrow-down picto-icon" style="transform: rotate(<%= forecast.swell_direction %>deg); -ms-transform: rotate(<%= forecast.swell_direction %>deg); -webkit-transform: rotate(<%= forecast.swell_direction %>deg);"></i></td>
-                  <% end %>
-                  <% forecasts_third_keep.each do |forecast| %> 
-                    <td> <i class="fas fa-arrow-down picto-icon" style="transform: rotate(<%= forecast.swell_direction %>deg); -ms-transform: rotate(<%= forecast.swell_direction %>deg); -webkit-transform: rotate(<%= forecast.swell_direction %>deg);"></i></td>
-                  <% end %>
-                </tr>
-                <%# Wind section %>
-                <tr class="bg-white ">
-                  <th> Wind</th>
-                  <% 15.times do %>
-                    <td></td>
-                  <% end %>
-                </tr>
-                <%# wind speed %>
-                <tr>
-                  <th scope="row"><i class="fas fa-wind pr-2 picto-icon"></i></th>
-                  <% forecasts_today_keep.each do |forecast| %> 
-                    <td> <%= forecast.wind_speed %>kts </td>
-                  <% end %>
-                  <% forecasts_tomorrow_keep.each do |forecast| %> 
-                    <td> <%= forecast.wind_speed %>kts</td>
-                  <% end %>
-                  <% forecasts_third_keep.each do |forecast| %> 
-                    <td> <%= forecast.wind_speed %>kts</td>
-                  <% end %>
-                </tr>
-                <%# wind direction %>
-                <tr>
-                  <th scope="row"><i class="far fa-compass"></th>
-                  <% forecasts_today_keep.each do |forecast| %> 
-                    <td> <i class="fas fa-location-arrow picto-icon" style="transform: rotate(<%= (forecast.wind_direction-210) %>deg); -ms-transform: rotate(<%= (forecast.wind_direction-210) %>deg); -webkit-transform: rotate(<%= (forecast.wind_direction-210) %>deg);"></i> </td>
-                  <% end %>
-                  <% forecasts_tomorrow_keep.each do |forecast| %> 
-                    <td> <i class="fas fa-location-arrow picto-icon" style="transform: rotate(<%= (forecast.wind_direction-210) %>deg); -ms-transform: rotate(<%= (forecast.wind_direction-210) %>deg); -webkit-transform: rotate(<%= (forecast.wind_direction-210) %>deg);"></i></td>
-                  <% end %>
-                  <% forecasts_third_keep.each do |forecast| %> 
-                    <td> <i class="fas fa-location-arrow picto-icon" style="transform: rotate(<%= (forecast.wind_direction-210) %>deg); -ms-transform: rotate(<%= (forecast.wind_direction-210) %>deg); -webkit-transform: rotate(<%= (forecast.wind_direction-210) %>deg);"></i></td>
-                  <% end %>
-                </tr>
-              </tbody>
-            </table> 
+          <div class="container rounded shadow bg-white col ml-3 p-2 text-center h-100%">
+            <%# render table and pass only NOAA data %>
+              <%= render partial: "forecast_table", locals: {spot_forecasts: Forecast.where(spot_id: @spot.id, source: "US NOAA")} %>
           </div>
         </div>
-        <%# Metreo tab %>
+        <%# Meteo tab %>
         <div class="tab-pane fade" id="afternoon" role="tabpanel" aria-labelledby="afternoon-tab">
-          <div class="container">
-            <div class="row row-cols-2">
-              
-            </div>
+          <div class="container rounded shadow bg-white col ml-3 p-2 text-center h-100%">
+            <%# render table and pass only Metreo data %>
+            <%# <%= render partial: "forecast_table", locals: {spot_forecasts: Forecast.where(spot_id: @spot.id, source: "Météo-France")} %> %>
           </div>
         </div>
       </div>
     </div>
     <%# map on right side %>
-    <div class="col-sm-3 text-center d-flex flex-column justify-content-between ml-3">
+    <div class="col col-md text-center d-flex flex-column justify-content-between ml-3">
       <div id="map"
         class="non-sticky"
         data-markers="<%= @markers.to_json %>"
         data-mapbox-api-key="<%= ENV['MAPBOX_API_KEY'] %>">
       </div>
-      <div class="bg-white shadow rounded pt-3 p-2 weather-card">
+      <div class="bg-white shadow rounded mb-3 p-2 weather-card">
         <div class="d-flex justify-content-center border-bottom">
           <p class="mx-3"><i class="fas fa-cloud-sun picto-icon"></i> <%= @spot.forecast_today.air_temperature %>°C</p>
           <p class="mx-3"><i class="fas fa-thermometer-three-quarters picto-icon"></i> <%= @spot.forecast_today.water_temperature %>°C</p>

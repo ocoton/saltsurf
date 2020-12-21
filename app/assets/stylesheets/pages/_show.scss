@@ -46,7 +46,7 @@ p, i {
 .non-sticky {
   position: relative !important;
   width: 100%;
-  height: 50%;
+  height: 16rem;
   border-radius: $border-radius;
 }
 
@@ -54,7 +54,7 @@ p, i {
   & p, td, i, th {
   align-items: center !important;
   padding: 6px !important;
-  font-size: smaller;
+  font-size: small;
   }
 & td, i {
   color: $gray !important;
@@ -68,9 +68,35 @@ p, i {
   }
 
   & td:nth-child(5n + 1) {
-    border-right: 1px dashed $light-blue;
+    border-right: 6px solid white;
   }
   & td:last-child {
     border-right: none !important;
   }
+}
+
+.row-icon {
+position: relative;
+
+  &:hover {
+    .hover-info {
+      visibility: visible;
+    }
+  }
+  .hover-info {
+    visibility: hidden;
+    position: absolute;
+    z-index: 1;
+    background-color: white;
+    padding: 8px;
+    font-size: small;
+    color: $gray;
+    border:solid 1px $lighter-gray;
+    font-weight: normal;
+    border-radius: $border-radius;
+    width: 8rem;
+
+    
+  }
+
 }
