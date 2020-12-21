@@ -48,7 +48,7 @@
   </div>
   <div class="row">
     <%# forecast-cards %>
-    <div class = "col-md-8 pr-0">
+    <div class = "col-md-8">
       <div class="px-0 tab-content" id="custom-tabs-name-tabContent">
         <%# morning tab %>
         <div class="tab-pane fade show active" id="morning" role="tabpanel" aria-labelledby="morning-tab">
@@ -69,7 +69,7 @@
       </div>
     </div>
     <%# map on right side %>
-    <div class="col-sm-4 text-center d-flex flex-column justify-content-between">
+    <div class="col-md-4 text-center d-flex flex-column justify-content-between" id="tide-map-card">
       <div id="map"
         class="non-sticky"
         data-markers="<%= @markers.to_json %>"
@@ -87,17 +87,17 @@
       </div>
     </div>
   </div>
-    <div class="row p-3 mt-3">
+    <div class="p-3 mt-3" id="spot-guide">
     <%# spot images %>
     <!-- carousel... -->
-    <div class = "col-sm-6 pr-0">
+    <div class = "col-sm-12 col-lg-6 pr-0">
       <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
           <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
           <li data-target="#carouselExampleIndicators" data-slide-to="2"></li>
         </ol>
-        <div class="carousel-inner">
+        <div class="carousel-inner rounded">
           <div class="carousel-item active">
             <div class="p-3 px-4" style="background-size: cover; height: 335px; background-position: center; background-image: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 15, 50, 0.3)), url(<%= cl_image_path @spot.photos.first.key %>);"> </div>
           </div>
@@ -123,8 +123,8 @@
       </div> -->
     </div>
     <%# spot description %>
-    <div class="col-sm-6 text-center p-0">
-      <div class="card-description">
+    <div class="col-sm-12 col-lg-6 text-center pr-0">
+      <div class="card-description rounded">
         <h4> Spot Guide </h4>
         <br>
         <p> <%= @spot.description %> </p>

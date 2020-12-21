@@ -85,6 +85,9 @@
 .search-bar-profile {
   border: none;
   height: 40px;
+  @media (max-width: 576px) {
+    max-width: 70%;
+  }
 }
 
 .hidden {
