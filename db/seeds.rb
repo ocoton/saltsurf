@@ -428,7 +428,6 @@ require "open-uri"
     printf("", i)
   end
 
-
   puts "all forecasts ate shit"
 
   1.times do |i|

@@ -1,3 +1,25 @@
+.padding-custom {
+  @media (min-width: 100px) and (max-width: 576px) {
+    padding-left: 2px;
+    padding-right: 2px;
+  }
+
+  @media (min-width:576px) {
+    padding-left: 20px;
+    padding-right: 20px;
+  }
+}
+
+.padding-custom-left {
+  @media (min-width: 100px) and (max-width: 576px) {
+    padding-left: 2px;
+  }
+
+  @media (min-width:576px) {
+    padding-left: 20px;
+  }
+}
+
 #favorite {
   position: absolute;
   top: 100px;
@@ -100,3 +122,26 @@ position: relative;
   }
 
 }
+
+#spot-guide {
+  @media (min-width: 100px) and (max-width: 768px) {
+    display:flex !important;
+    flex-direction: column !important;
+    margin-left: -15px;
+  }
+
+  @media (min-width: 768px) {
+    display: flex;
+    flex-wrap: wrap;
+    margin-right: -15px;
+    margin-left: -15px;
+  }
+}
+
+#tide-map-card {
+  @media (min-width: 100px) and (max-width: 768px) {
+    padding: 0 30px !important;
+    margin-top: 20px;
+  }
+}
+

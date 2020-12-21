@@ -56,7 +56,7 @@
             <p class="bigger-font"><%= sesh.spot.name %> <%=  %>  <small class="grey-color text-right op-7">    <%= sesh.timestamp.strftime("%d %b %Y") %></small></p>
             <div class="d-flex icons-opacity">
               <% spot = Spot.find(sesh.spot_id) %>
-              <div class="px-4">
+              <div class="padding-custom">
                 <% if spot.forecast_today.wave_height < 0.5 %>
                 <p><%= image_tag("1-wave.svg",class: "picto-wave ",style:"width: 20px; height: 20px")%> <%= (spot.forecast_today.wave_height*10).round/10.to_f%>m</p>
                 <% elsif spot.forecast_today.wave_height < 1 %>
@@ -65,23 +65,22 @@
                 <p><%= image_tag("3-waves.svg",class: "picto-wave ",style:"width: 20px; height: 20px, color:#0D535B" )%> <%= (spot.forecast_today.wave_height*10).round/10.to_f%>m</p>
                 <% end %>
               </div>
-              <div class=" px-4">
-               <!--  <p><i class="fas fa-location-arrow" style="transform: rotate(<%= spot.forecasts.first.wind_direction %>deg); -ms-transform: rotate(<%= spot.forecasts.first.wind_direction %>deg); -webkit-transform: rotate(<%= spot.forecasts.first.wind_direction %>deg);"></i>
-                  <%= spot.forecasts.first.wind_speed %>kn
-                </p> -->
+              <div class="padding-custom">
                 <p class="<%= if spot.forecast_today.wind_speed >= 15 then 'text-danger' elsif spot.forecast_today.wind_speed >= 10 then 'text-warning' else 'text-success' end %>">
                       <i class="fas fa-location-arrow" style="transform: rotate(<%= spot.forecast_today.wind_direction %>deg); -ms-transform: rotate(<%= spot.forecast_today.wind_direction %>deg); -webkit-transform: rotate(<%= spot.forecast_today.wind_direction %>deg);"></i>
                       <%= spot.forecast_today.wind_speed %>kn
                     </p>
               </div>
-              <div class="d-flex pl-4">
+              <div class="padding-custom-left">
+                <p>
                     <i class="fas fa-wave-square" ></i>
-                    <p class="pl-2"><%= spot.forecast_today.period %> s </p>
+                    <%= spot.forecast_today.period %>s
+                </p>
               </div>
             </div>
           </div>
           <div class="d-flex justify-content-between">
-            <div class="d-flex">
+            <div class="d-flex max-width-65">
               <p class="mb-0 grey-color op-7"><%= sesh.description %></p>
               <p class="pl-1 py-0 btn edit-button-description edit-link op-5">
                 <i>
