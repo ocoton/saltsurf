@@ -19,6 +19,6 @@
 
 # Learn more: http://github.com/javan/whenever
 
-every 3.days do
+every 5.days do
   rake "forecast:update"
 end
