@@ -10,7 +10,7 @@ class GetTideApiService
     lat = @spot.latitude;
     lng =  @spot.longitude;
     start_time = Time.now.utc.strftime("%Y-%m-%d")
-    end_time = (Time.now.utc.beginning_of_day + 4.days).strftime("%Y-%m-%d")
+    end_time = (Time.now.utc.beginning_of_day + 7.days).strftime("%Y-%m-%d")
     # params = 'waveHeight,swellDirection,swellHeight,swellPeriod,waveDirection,waveHeight,wavePeriod,windDirection,windSpeed';
     response = HTTParty.get("https://api.stormglass.io/v2/tide/extremes/point?lat=#{lat}&lng=#{lng}&start=#{start_time}&end=#{end_time}",
       headers: {
@@ -20,7 +20,7 @@ class GetTideApiService
     rawresponse = JSON.parse(response.body)
 
     if rawresponse['data']
-      rawresponse['data'].each do |data| 
+      rawresponse['data'].each do |data|
         tide = Tide.new
         tide.timestamp = DateTime.parse(data['time'])
         tide.height = data['height']
@@ -32,4 +32,3 @@ class GetTideApiService
     return
   end
 end
-
