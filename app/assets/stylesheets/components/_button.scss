@@ -11,6 +11,16 @@
         }
 }
 
+.btn-white-map {
+    padding: 6px 12px;
+    color: rgba(255, 255, 255, .6);
+     font-size: 16px;
+    &:hover {
+        color:rgba(255, 255, 255, 1);
+        text-decoration: none;
+        }
+}
+
 .btn-back {
   padding: 8px 8px;
   color: rgba(255, 255, 255, 0.7);
