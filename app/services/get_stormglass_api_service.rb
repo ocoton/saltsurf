@@ -1,7 +1,7 @@
 require 'open-uri'
 
 class GetStormglassApiService
-
+class ProcessingError < StandardError; end
   def initialize(spot)
     @spot = spot
   end
