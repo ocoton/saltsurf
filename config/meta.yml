@@ -1,5 +1,5 @@
 meta_product_name: "SALT"
 meta_title: "SALT - Find where the surf is pumping near you"
 meta_description: "SALT will find for you the best spots to go surfing from your location, in a specific radius"
-meta_image: "https://images.ctfassets.net/zfxytrk6nf7m/1nX9fSWd5lc7L9Lx8PheTL/f3af4a9a22803f783c7203126e9b30f7/ILoveAnglet___RiBLANC-23_1280x560.jpg?w=1200&h=630&q=90&fl=progressive&fit=fill" # should exist in `app/assets/images/`
+meta_image: "salt_background.png" # should exist in `app/assets/images/`
 twitter_account: ""   # required for Twitter Cards
