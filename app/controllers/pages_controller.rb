@@ -3,13 +3,18 @@ class PagesController < ApplicationController
 
   def home
     if user_signed_in? && current_user.favorites.present?
-      @spots = current_user.spots if current_user.spots
+      @top_spots = current_user.spots if current_user.spots
     else
-      @spots = Spot.all
-      @spots = @spots.sort_by{ |spot| spot.forecast_today.rating }
-      .reverse
-      .take(4)
+      @top_spots = []
+      all = []
+      Spot.all.each do |spot|
+        all << spot.forecast_today
+      end
+      top_forecasts = all.sort_by(&:rating).reverse.take(4)
 
+      top_forecasts.each do |f|
+        @top_spots << f.spot
+      end
     end
   end
 end

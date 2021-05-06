@@ -11,8 +11,8 @@ class Spot < ApplicationRecord
 
 
   def forecast_today
-    self.forecasts.where(source: "Météo-France")
-             .where(timestamp: (Time.now.utc.beginning_of_day + 8.hours))
+    self.forecasts.where(source: "US NOAA")
+             .where(timestamp: (Time.now.utc.beginning_of_day + 10.hours))
              .limit(1)
              .take
   end
