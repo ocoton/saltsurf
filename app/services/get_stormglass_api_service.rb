@@ -26,6 +26,8 @@ class ProcessingError < StandardError; end
       wind_speed_us = hour["windSpeed"]["noaa"].to_f
       rating_us = get_rating(wave_height_us, wave_period_us, wind_speed_us)
 
+      # if hour["seaLevel"]["sg"].nil? then level = 0.0 else level = hour["seaLevel"]["sg"] end
+
       Forecast.create!(
         spot: @spot,
         timestamp: hour["time"],
@@ -39,7 +41,7 @@ class ProcessingError < StandardError; end
         source: "US NOAA",
         low_tide: DateTime.now + 6.25.hours,
         high_tide: DateTime.now,
-        sea_level: hour["seaLevel"]["sg"],
+        sea_level: 0.0,
         air_temperature: hour["airTemperature"]["sg"],
         water_temperature:hour["waterTemperature"]["sg"],
       )
@@ -50,6 +52,7 @@ class ProcessingError < StandardError; end
       wind_speed_mf = hour["windSpeed"]["meteo"].to_f
 
       rating_mf = get_rating(wave_height_mf, wave_period_mf, wind_speed_mf)
+      # if hour["seaLevel"]["sg"].nil? then level = 0.0 else level = hour["seaLevel"]["sg"] end
 
       Forecast.create!(
         spot: @spot,
@@ -64,7 +67,7 @@ class ProcessingError < StandardError; end
         source: "Météo-France",
         low_tide: DateTime.now + 6.25.hours,
         high_tide: DateTime.now,
-        sea_level: hour["seaLevel"]["sg"],
+        sea_level: 0.0,
         air_temperature: hour["airTemperature"]["sg"],
         water_temperature:hour["waterTemperature"]["sg"],
       )
