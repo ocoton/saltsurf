@@ -10,11 +10,11 @@ class Spot < ApplicationRecord
   # after_validation :geocode, if: :will_save_change_to_name?
 
 
-  def forecast_today
-    self.forecasts.where(source: "US NOAA")
-             .where(timestamp: (Time.now.utc.beginning_of_day + 10.hours))
-             .limit(1)
-             .take
-  end
+  # def forecast_today
+  #   self.forecasts.where(source: "US NOAA")
+  #            .where(timestamp: (Time.now.utc.beginning_of_day + 10.hours))
+  #            .limit(1)
+  #            .take
+  # end
 
 end

@@ -3,41 +3,41 @@
 <% else %>
 
   <%# calculations %>
-    <% forecasts_today = [] %> 
-    <% forecasts_tomorrow = [] %> 
-    <% forecasts_third = [] %> 
+    <% forecasts_today = [] %>
+    <% forecasts_tomorrow = [] %>
+    <% forecasts_third = [] %>
 
-    <%spot_forecasts.each do |forecast|%> 
-      <%if forecast.timestamp.day == Time.now.utc.day%> 
-      <% forecasts_today << forecast%> 
-      <%elsif forecast.timestamp.day == Time.now.utc.day + 1%> 
-        <%forecasts_tomorrow << forecast%> 
-      <%elsif forecast.timestamp.day == Time.now.utc.day + 2%> 
-        <%forecasts_third << forecast%> 
-      <%end%> 
+    <%@spot.forecasts.each do |forecast|%>
+      <%if forecast.timestamp.day == Time.now.utc.day%>
+      <% forecasts_today << forecast%>
+      <%elsif forecast.timestamp.day == Time.now.utc.day + 1%>
+        <%forecasts_tomorrow << forecast%>
+      <%elsif forecast.timestamp.day == Time.now.utc.day + 2%>
+        <%forecasts_third << forecast%>
+      <%end%>
     <%end%>
     <%# only keep certain timestamps of the day %>
     <%forecasts_today_keep = []%>
     <%forecasts_tomorrow_keep = []%>
     <%forecasts_third_keep = []%>
 
-    <%forecasts_today.each do |forecast|%> 
-      <%if [6, 10, 14, 16, 20].include? forecast.timestamp.hour%> 
-        <%forecasts_today_keep << forecast%> 
-      <%end%> 
-    <%end%> 
-    <%forecasts_tomorrow.each do |forecast|%> 
-      <%if [6, 10, 14, 16, 20].include? forecast.timestamp.hour%> 
-        <%forecasts_tomorrow_keep << forecast%> 
-      <%end%> 
-    <%end%> 
-      <%forecasts_third.each do |forecast|%> 
-      <%if [6, 10, 14, 16, 20].include? forecast.timestamp.hour%> 
-        <%forecasts_third_keep << forecast %> 
-      <%end%> 
-    <%end%> 
-  
-  
+    <%forecasts_today.each do |forecast|%>
+      <%if [6, 10, 14, 16, 20].include? forecast.timestamp.hour%>
+        <%forecasts_today_keep << forecast%>
+      <%end%>
+    <%end%>
+    <%forecasts_tomorrow.each do |forecast|%>
+      <%if [6, 10, 14, 16, 20].include? forecast.timestamp.hour%>
+        <%forecasts_tomorrow_keep << forecast%>
+      <%end%>
+    <%end%>
+      <%forecasts_third.each do |forecast|%>
+      <%if [6, 10, 14, 16, 20].include? forecast.timestamp.hour%>
+        <%forecasts_third_keep << forecast %>
+      <%end%>
+    <%end%>
+
+
   <table class="table-striped rounded custom-table bg-white">
   <%# HEADER %>
     <thead>
@@ -69,13 +69,13 @@
              <span class="hover-info">Time of day</span>
           </div>
        </th>
-        <% forecasts_today_keep.each do |forecast| %> 
+        <% forecasts_today_keep.each do |forecast| %>
           <td> <%= forecast.timestamp.hour %>:00 </td>
         <% end %>
-        <% forecasts_tomorrow_keep.each do |forecast| %> 
+        <% forecasts_tomorrow_keep.each do |forecast| %>
           <td> <%= forecast.timestamp.hour %>:00</td>
         <% end %>
-        <% forecasts_third_keep.each do |forecast| %> 
+        <% forecasts_third_keep.each do |forecast| %>
           <td> <%= forecast.timestamp.hour %>:00</td>
         <% end %>
       </tr>
@@ -84,20 +84,20 @@
         <th> Waves</th>
       </tr>
       <%# wave height %>
-      <tr> 
+      <tr>
         <th scope="row">
           <div class="row-icon">
             <i class="fas fa-arrows-alt-v picto-icon text-primary"></i>
             <span class="hover-info">Wave height</span>
           </div>
        </th>
-        <% forecasts_today_keep.each do |forecast| %> 
+        <% forecasts_today_keep.each do |forecast| %>
           <td> <%= forecast.wave_height.round(1) %>m</td>
         <% end %>
-        <% forecasts_tomorrow_keep.each do |forecast| %> 
+        <% forecasts_tomorrow_keep.each do |forecast| %>
           <td> <%= forecast.wave_height.round(1) %>m</td>
         <% end %>
-        <% forecasts_third_keep.each do |forecast| %> 
+        <% forecasts_third_keep.each do |forecast| %>
           <td> <%= forecast.wave_height.round(1) %>m</td>
         <% end %>
       </tr>
@@ -109,13 +109,13 @@
             <span class="hover-info">Wave period</span>
           </div>
         </th>
-        <% forecasts_today_keep.each do |forecast| %> 
+        <% forecasts_today_keep.each do |forecast| %>
           <td> <%= forecast.period %>s </td>
         <% end %>
-        <% forecasts_tomorrow_keep.each do |forecast| %> 
+        <% forecasts_tomorrow_keep.each do |forecast| %>
           <td> <%= forecast.period %>s</td>
         <% end %>
-        <% forecasts_third_keep.each do |forecast| %> 
+        <% forecasts_third_keep.each do |forecast| %>
           <td> <%= forecast.period %>s</td>
         <% end %>
       </tr>
@@ -127,13 +127,13 @@
             <span class="hover-info">Swell direction</span>
           </div>
         </th>
-        <% forecasts_today_keep.each do |forecast| %> 
+        <% forecasts_today_keep.each do |forecast| %>
           <td> <i class="fas fa-arrow-down picto-icon" style="transform: rotate(<%= forecast.swell_direction %>deg); -ms-transform: rotate(<%= forecast.swell_direction %>deg); -webkit-transform: rotate(<%= forecast.swell_direction %>deg);"></i> </td>
         <% end %>
-        <% forecasts_tomorrow_keep.each do |forecast| %> 
+        <% forecasts_tomorrow_keep.each do |forecast| %>
           <td> <i class="fas fa-arrow-down picto-icon" style="transform: rotate(<%= forecast.swell_direction %>deg); -ms-transform: rotate(<%= forecast.swell_direction %>deg); -webkit-transform: rotate(<%= forecast.swell_direction %>deg);"></i></td>
         <% end %>
-        <% forecasts_third_keep.each do |forecast| %> 
+        <% forecasts_third_keep.each do |forecast| %>
           <td> <i class="fas fa-arrow-down picto-icon" style="transform: rotate(<%= forecast.swell_direction %>deg); -ms-transform: rotate(<%= forecast.swell_direction %>deg); -webkit-transform: rotate(<%= forecast.swell_direction %>deg);"></i></td>
         <% end %>
       </tr>
@@ -149,13 +149,13 @@
             <span class="hover-info">Wind speed</span>
           </div>
         </th>
-        <% forecasts_today_keep.each do |forecast| %> 
+        <% forecasts_today_keep.each do |forecast| %>
           <td> <%= forecast.wind_speed %>kts </td>
         <% end %>
-        <% forecasts_tomorrow_keep.each do |forecast| %> 
+        <% forecasts_tomorrow_keep.each do |forecast| %>
           <td> <%= forecast.wind_speed %>kts</td>
         <% end %>
-        <% forecasts_third_keep.each do |forecast| %> 
+        <% forecasts_third_keep.each do |forecast| %>
           <td> <%= forecast.wind_speed %>kts</td>
         <% end %>
       </tr>
@@ -167,16 +167,16 @@
             <span class="hover-info">Wind direction</span>
           </div>
         </th>
-        <% forecasts_today_keep.each do |forecast| %> 
+        <% forecasts_today_keep.each do |forecast| %>
           <td> <i class="fas fa-location-arrow picto-icon" style="transform: rotate(<%= (forecast.wind_direction-210) %>deg); -ms-transform: rotate(<%= (forecast.wind_direction-210) %>deg); -webkit-transform: rotate(<%= (forecast.wind_direction-210) %>deg);"></i> </td>
         <% end %>
-        <% forecasts_tomorrow_keep.each do |forecast| %> 
+        <% forecasts_tomorrow_keep.each do |forecast| %>
           <td> <i class="fas fa-location-arrow picto-icon" style="transform: rotate(<%= (forecast.wind_direction-210) %>deg); -ms-transform: rotate(<%= (forecast.wind_direction-210) %>deg); -webkit-transform: rotate(<%= (forecast.wind_direction-210) %>deg);"></i></td>
         <% end %>
-        <% forecasts_third_keep.each do |forecast| %> 
+        <% forecasts_third_keep.each do |forecast| %>
           <td> <i class="fas fa-location-arrow picto-icon" style="transform: rotate(<%= (forecast.wind_direction-210) %>deg); -ms-transform: rotate(<%= (forecast.wind_direction-210) %>deg); -webkit-transform: rotate(<%= (forecast.wind_direction-210) %>deg);"></i></td>
         <% end %>
       </tr>
     </tbody>
-  </table> 
+  </table>
 <% end %>

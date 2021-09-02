@@ -77,8 +77,8 @@
       </div>
       <div class="bg-white shadow rounded mb-3 p-2 weather-card">
         <div class="d-flex justify-content-center border-bottom">
-          <p class="mx-3"><i class="fas fa-cloud-sun picto-icon"></i> <%= @spot.forecast_today.air_temperature %>°C</p>
-          <p class="mx-3"><i class="fas fa-thermometer-three-quarters picto-icon"></i> <%= @spot.forecast_today.water_temperature %>°C</p>
+          <p class="mx-3"><i class="fas fa-cloud-sun picto-icon"></i> <%= @spot.forecasts.first.air_temperature %>°C</p>
+          <p class="mx-3"><i class="fas fa-thermometer-three-quarters picto-icon"></i> <%= @spot.forecasts.first.water_temperature %>°C</p>
         </div>
         <div class=" pt-3">
           <p>High Tide: <strong><%= @today_high_tides.empty? ? "no data" : @today_high_tides.first.timestamp.strftime('%I:%M %p') %></strong></p>

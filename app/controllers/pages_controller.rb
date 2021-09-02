@@ -8,9 +8,9 @@ class PagesController < ApplicationController
       @top_spots = []
       all = []
       Spot.all.each do |spot|
-        all << spot.forecast_today
+        all << spot
       end
-      top_forecasts = all.sort_by(&:rating).reverse.take(4)
+      top_forecasts = Forecast.all.take(4)
 
       top_forecasts.each do |f|
         @top_spots << f.spot
